@@ -1,0 +1,2 @@
+class Giftr
+end
