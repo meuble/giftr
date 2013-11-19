@@ -3,23 +3,24 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
 describe Giftr do
+  before :each do
+    @gr = Giftr.new(File.dirname(__FILE__) + '/config/people.yml')
+  end
+
   describe '#names' do
     it "should get names" do
-      gr = Giftr.new(File.dirname(__FILE__) + '/config/people.yml')
-      expect(gr.names).to eq(["Stéphane", "Pierre", "Claire", "Michel", "Claire DS"])
+      expect(@gr.names).to eq(["Stéphane", "Pierre", "Claire", "Michel", "Claire DS"])
     end
   end
 
   describe '#emails' do
     it "should get emails" do
-      gr = Giftr.new(File.dirname(__FILE__) + '/config/people.yml')
-      expect(gr.emails).to eq(["stephane@imeuble.info", "pierre@imeuble.info", "claire@imeuble.info", "michel@imeuble.info", "claireds@imeuble.info"])
+      expect(@gr.emails).to eq(["stephane@imeuble.info", "pierre@imeuble.info", "claire@imeuble.info", "michel@imeuble.info", "claireds@imeuble.info"])
     end
   end
 
   describe '#pairs' do
     before :each do
-      @gr = Giftr.new(File.dirname(__FILE__) + '/config/people.yml')
       @pairs = @gr.pairs
     end
 
@@ -48,46 +49,39 @@ describe Giftr do
 
   describe "#check_pair" do
     it "should return false when giver is receiver" do
-      gr = Giftr.new(File.dirname(__FILE__) + '/config/people.yml')
-      expect(gr.check_pair({:giver => {:name => "1"}, :receiver => {:name => "1"}})).to be_false
+      expect(@gr.check_pair({:giver => {:name => "1"}, :receiver => {:name => "1"}})).to be_false
     end
 
     it "should return false when giver is in relationship with receiver" do
-      gr = Giftr.new(File.dirname(__FILE__) + '/config/people.yml')
-      expect(gr.check_pair({:giver => {:name => "1", :couple_id => "toto"}, :receiver => {:name => "2", :couple_id => "toto"}})).to be_false
+      expect(@gr.check_pair({:giver => {:name => "1", :couple_id => "toto"}, :receiver => {:name => "2", :couple_id => "toto"}})).to be_false
     end
 
     it "should return true when giver is not receiver" do
-      gr = Giftr.new(File.dirname(__FILE__) + '/config/people.yml')
-      expect(gr.check_pair({:giver => {:name => "1"}, :receiver => {:name => "2"}})).to be_true
+      expect(@gr.check_pair({:giver => {:name => "1"}, :receiver => {:name => "2"}})).to be_true
     end
 
     it "should return true when giver is not in relationship with the receiver" do
-      gr = Giftr.new(File.dirname(__FILE__) + '/config/people.yml')
-      expect(gr.check_pair({:giver => {:name => "2", :couple_id => "titi"}, :receiver => {:name => "1", :couple_id => "toto"}})).to be_true
+      expect(@gr.check_pair({:giver => {:name => "2", :couple_id => "titi"}, :receiver => {:name => "1", :couple_id => "toto"}})).to be_true
     end
   end
 
   describe "#check_pairs" do
     it 'should check each pairs' do
-      gr = Giftr.new(File.dirname(__FILE__) + '/config/people.yml')
       pairs = [{:giver => {:name => "1"}, :receiver => {:name => "2"}}, {:giver => {:name => "3"}, :receiver => {:name => "4"}}, {:giver => {:name => "4"}, :receiver => {:name => "5"}}]
       pairs.each do |pair|
-        gr.should_receive(:check_pair).once.with(pair).and_return(true)
+        @gr.should_receive(:check_pair).once.with(pair).and_return(true)
       end
-      expect(gr.check_pairs(pairs)).to be_true
+      expect(@gr.check_pairs(pairs)).to be_true
     end
 
     it "should return true when all pairs are true" do
-      gr = Giftr.new(File.dirname(__FILE__) + '/config/people.yml')
       pairs = [{:giver => {:name => "1"}, :receiver => {:name => "2"}}, {:giver => {:name => "3"}, :receiver => {:name => "6"}}, {:giver => {:name => "4"}, :receiver => {:name => "6"}}]
-      expect(gr.check_pairs(pairs)).to be_true
+      expect(@gr.check_pairs(pairs)).to be_true
     end
     
     it "should return false when at least one pair is false" do
-      gr = Giftr.new(File.dirname(__FILE__) + '/config/people.yml')
       pairs = [{:giver => {:name => "1"}, :receiver => {:name => "2"}}, {:giver => {:name => "6"}, :receiver => {:name => "6"}}, {:giver => {:name => "4"}, :receiver => {:name => "5"}}]
-      expect(gr.check_pairs(pairs)).to be_false
+      expect(@gr.check_pairs(pairs)).to be_false
     end
   end
 end
