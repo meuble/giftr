@@ -1,0 +1,21 @@
+-
+  :name: Stéphane
+  :email: stephane@imeuble.info
+
+-
+  :name: Pierre
+  :email: pierre@imeuble.info
+
+-
+  :name: Claire
+  :email: claire@imeuble.info
+
+-
+  :name: Michel
+  :email: michel@imeuble.info
+  :couple_id: michoux
+
+-
+  :name: Claire DS
+  :email: claireds@imeuble.info
+  :couple_id: michoux
