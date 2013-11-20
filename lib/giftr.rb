@@ -2,8 +2,6 @@
 
 require 'yaml'
 require 'awesome_print'
-require File.dirname(__FILE__) + '/../lib/sender_base'
-require File.dirname(__FILE__) + '/../lib/mailer'
 
 class Giftr
   attr_reader :people
@@ -39,10 +37,4 @@ class Giftr
     return false if !pair[:giver][:couple_id].nil? && pair[:giver][:couple_id] == pair[:receiver][:couple_id]
     return true
   end
-end
-
-mailer = Mailer.new
-
-Giftr.new.pairs.each do |pair|
-  mailer.send(pair)
 end
