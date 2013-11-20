@@ -2,7 +2,7 @@
 
 require File.dirname(__FILE__) + '/spec_helper'
 
-describe SenderBase do
+describe Mailer do
   before :each do
     @mailer = Mailer.new(:smtp_option => {}, :config_path => File.dirname(__FILE__) + '/config/mailer.yml')
   end
