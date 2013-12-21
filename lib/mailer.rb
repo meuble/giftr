@@ -4,7 +4,7 @@ require "pony"
 
 class Mailer < SenderBase
   def initialize(options = {})
-    @config = YAML.load_file(options[:config_path] || File.dirname(__FILE__) + '/../config/mailer.yml')
+    @config = YAML.load_file(options[:config_path] || File.join(File.dirname(__FILE__), '..', 'config', 'mailer.yml'))
     @smtp_options = options[:smtp_options] || @config[:smtp_options]
   end
 

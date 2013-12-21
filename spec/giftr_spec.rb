@@ -1,10 +1,10 @@
 #encoding: utf-8
 
-require File.dirname(__FILE__) + '/spec_helper'
+require File.join(File.dirname(__FILE__), 'spec_helper')
 
 describe Giftr do
   before :each do
-    @gr = Giftr.new(File.dirname(__FILE__) + '/config/people.yml')
+    @gr = Giftr.new(File.join(File.dirname(__FILE__), 'config', 'people.yml'))
   end
 
   describe '#names' do

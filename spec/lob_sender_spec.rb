@@ -1,11 +1,11 @@
 #encoding: utf-8
 
-require File.dirname(__FILE__) + '/spec_helper'
+require File.join(File.dirname(__FILE__), 'spec_helper')
 
 describe LobSender do
   describe "#initialize" do
     it "should initialize Lob with api_key" do
-      ls = LobSender.new(:config_path => File.dirname(__FILE__) + '/config/lob.yml')
+      ls = LobSender.new(:config_path => File.join(File.dirname(__FILE__), 'config', 'lob.yml'))
       ls.lob 
       expect(ls.lob).not_to be_nil
       expect(ls.lob.options[:api_key]).to eq("test_4f7e1328726da23787389a90e478b")
@@ -14,7 +14,7 @@ describe LobSender do
 
   describe "#send" do
     before :each do
-      @ls = LobSender.new(:config_path => File.dirname(__FILE__) + '/config/lob.yml')
+      @ls = LobSender.new(:config_path => File.join(File.dirname(__FILE__), 'config', 'lob.yml'))
     end
 
     it "should send postcard" do

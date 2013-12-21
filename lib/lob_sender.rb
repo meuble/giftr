@@ -6,7 +6,7 @@ class LobSender < SenderBase
   attr_accessor :lob
 
   def initialize(options = {})
-    @config = YAML.load_file(options[:config_path] || File.dirname(__FILE__) + '/../config/lob.yml')
+    @config = YAML.load_file(options[:config_path] || File.join(File.dirname(__FILE__), '..', 'config', 'lob.yml'))
     self.lob = Lob(:api_key => @config[:api_key])
   end
 

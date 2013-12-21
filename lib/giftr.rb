@@ -7,7 +7,7 @@ class Giftr
   attr_reader :people
 
   def initialize(config_path = nil)
-    @people = YAML.load_file(config_path || File.dirname(__FILE__) + '/../config/people.yml')
+    @people = YAML.load_file(config_path || File.join(File.dirname(__FILE__), '..', 'config', 'people.yml'))
   end
 
   def names

@@ -1,10 +1,10 @@
 #encoding: utf-8
 
-require File.dirname(__FILE__) + '/spec_helper'
+require File.join(File.dirname(__FILE__), 'spec_helper')
 
 describe Mailer do
   before :each do
-    @mailer = Mailer.new(:smtp_option => {}, :config_path => File.dirname(__FILE__) + '/config/mailer.yml')
+    @mailer = Mailer.new(:smtp_option => {}, :config_path => File.join(File.dirname(__FILE__), 'config', 'mailer.yml'))
   end
 
   describe "#send" do
