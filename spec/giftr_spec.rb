@@ -25,7 +25,7 @@ describe Giftr do
     end
 
     it "should be an array" do
-      expect(@pairs.is_a?(Array)).to be_true
+      expect(@pairs.is_a?(Array)).to be true
     end
 
     it 'should not assigns 2 same receiver' do
@@ -49,19 +49,19 @@ describe Giftr do
 
   describe "#check_pair" do
     it "should return false when giver is receiver" do
-      expect(@gr.check_pair({:giver => {:name => "1"}, :receiver => {:name => "1"}})).to be_false
+      expect(@gr.check_pair({:giver => {:name => "1"}, :receiver => {:name => "1"}})).to be false
     end
 
     it "should return false when giver is in relationship with receiver" do
-      expect(@gr.check_pair({:giver => {:name => "1", :couple_id => "toto"}, :receiver => {:name => "2", :couple_id => "toto"}})).to be_false
+      expect(@gr.check_pair({:giver => {:name => "1", :couple_id => "toto"}, :receiver => {:name => "2", :couple_id => "toto"}})).to be false
     end
 
     it "should return true when giver is not receiver" do
-      expect(@gr.check_pair({:giver => {:name => "1"}, :receiver => {:name => "2"}})).to be_true
+      expect(@gr.check_pair({:giver => {:name => "1"}, :receiver => {:name => "2"}})).to be true
     end
 
     it "should return true when giver is not in relationship with the receiver" do
-      expect(@gr.check_pair({:giver => {:name => "2", :couple_id => "titi"}, :receiver => {:name => "1", :couple_id => "toto"}})).to be_true
+      expect(@gr.check_pair({:giver => {:name => "2", :couple_id => "titi"}, :receiver => {:name => "1", :couple_id => "toto"}})).to be true
     end
   end
 
@@ -71,17 +71,17 @@ describe Giftr do
       pairs.each do |pair|
         @gr.should_receive(:check_pair).once.with(pair).and_return(true)
       end
-      expect(@gr.check_pairs(pairs)).to be_true
+      expect(@gr.check_pairs(pairs)).to be true
     end
 
     it "should return true when all pairs are true" do
       pairs = [{:giver => {:name => "1"}, :receiver => {:name => "2"}}, {:giver => {:name => "3"}, :receiver => {:name => "6"}}, {:giver => {:name => "4"}, :receiver => {:name => "6"}}]
-      expect(@gr.check_pairs(pairs)).to be_true
+      expect(@gr.check_pairs(pairs)).to be true
     end
-    
+
     it "should return false when at least one pair is false" do
       pairs = [{:giver => {:name => "1"}, :receiver => {:name => "2"}}, {:giver => {:name => "6"}, :receiver => {:name => "6"}}, {:giver => {:name => "4"}, :receiver => {:name => "5"}}]
-      expect(@gr.check_pairs(pairs)).to be_false
+      expect(@gr.check_pairs(pairs)).to be false
     end
   end
 end
