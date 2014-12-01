@@ -29,12 +29,18 @@ class Giftr
   end
 
   def check_pairs(pairs)
-    pairs.inject(true) {|acc, pair| acc = acc && self.check_pair(pair) }
+    each_pair_criteria = pairs.inject(true) {|acc, pair| acc = acc && self.check_pair(pair) }
+    each_pair_criteria && has_circular_pairs?(pairs)
   end
 
   def check_pair(pair)
     return false if pair[:giver] == pair[:receiver]
     return false if !pair[:giver][:couple_id].nil? && pair[:giver][:couple_id] == pair[:receiver][:couple_id]
     return true
+  end
+
+  def has_circular_pairs?(pairs)
+    names_pairs = pairs.map{ |pair| [pair[:giver][:name], pair[:receiver][:name]] }.map(&:sort)
+    names_pairs.uniq.length == names_pairs.length
   end
 end

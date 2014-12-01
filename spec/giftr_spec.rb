@@ -74,14 +74,42 @@ describe Giftr do
       expect(@gr.check_pairs(pairs)).to be true
     end
 
-    it "should return true when all pairs are true" do
+    it "should check if pairs are circular" do
+      pairs = [{:giver => {:name => "1"}, :receiver => {:name => "2"}}, {:giver => {:name => "3"}, :receiver => {:name => "4"}}, {:giver => {:name => "4"}, :receiver => {:name => "5"}}]
+      @gr.should_receive(:has_circular_pairs?).once.with(pairs).and_return(true)
+      expect(@gr.check_pairs(pairs)).to be true
+    end
+
+    it "should return true when all pairs are true and circular" do
       pairs = [{:giver => {:name => "1"}, :receiver => {:name => "2"}}, {:giver => {:name => "3"}, :receiver => {:name => "6"}}, {:giver => {:name => "4"}, :receiver => {:name => "6"}}]
       expect(@gr.check_pairs(pairs)).to be true
     end
 
-    it "should return false when at least one pair is false" do
+    it "should return false when all pairs are true but not circular" do
+      pairs = [{:giver => {:name => "1"}, :receiver => {:name => "2"}}, {:giver => {:name => "4"}, :receiver => {:name => "5"}}, {:giver => {:name => "5"}, :receiver => {:name => "4"}}]
+      expect(@gr.check_pairs(pairs)).to be false
+    end
+
+    it "should return false when at least one pair is false and pairs are circular" do
       pairs = [{:giver => {:name => "1"}, :receiver => {:name => "2"}}, {:giver => {:name => "6"}, :receiver => {:name => "6"}}, {:giver => {:name => "4"}, :receiver => {:name => "5"}}]
       expect(@gr.check_pairs(pairs)).to be false
+    end
+
+    it "should return false when at least one pair is false and pairs are not circular" do
+      pairs = [{:giver => {:name => "1"}, :receiver => {:name => "2"}}, {:giver => {:name => "6"}, :receiver => {:name => "6"}}, {:giver => {:name => "2"}, :receiver => {:name => "1"}}]
+      expect(@gr.check_pairs(pairs)).to be false
+    end
+  end
+
+  describe "#has_circular_pairs?(pairs)" do
+    it "should return false if a giver is the receiver of his receiver" do
+      pairs = [{:giver => {:name => "test1", :email => "test1@test.com"}, :receiver => {:name => "test2", :email => "test2@test.com"}}, {:giver => {:name => "test2", :email => "test2@test.com"}, :receiver => {:name => "test1", :email => "test1@test.com"}}, {:giver => {:name => "test3", :email => "test3@test.com"}, :receiver => {:name => "test4", :email => "test4@test.com"}}, {:giver => {:name => "test4", :email => "test4@test.com"}, :receiver => {:name => "test3", :email => "test3@test.com"}}]
+      expect(@gr.has_circular_pairs?(pairs)).to be false
+    end
+
+    it "should return true if no giver is the receiver of his receiver" do
+      pairs = [{:giver => {:name => "test1", :email => "test1@test.com"}, :receiver => {:name => "test2", :email => "test2@test.com"}}, {:giver => {:name => "test2", :email => "test2@test.com"}, :receiver => {:name => "test3", :email => "test3@test.com"}}, {:giver => {:name => "test3", :email => "test3@test.com"}, :receiver => {:name => "test4", :email => "test4@test.com"}}, {:giver => {:name => "test4", :email => "test4@test.com"}, :receiver => {:name => "test1", :email => "test1@test.com"}}]
+      expect(@gr.has_circular_pairs?(pairs)).to be true
     end
   end
 end
