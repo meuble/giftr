@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rack', '~>1.1'
+gem 'rack'
 gem 'rspec', :require => 'spec'
 gem 'awesome_print'
 gem 'pony'
