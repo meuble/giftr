@@ -19,7 +19,7 @@ GEM
     netrc (0.11.0)
     pony (1.13.1)
       mail (>= 2.0)
-    rack (1.6.13)
+    rack (2.1.4)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
       http-cookie (>= 1.0.2, < 2.0)
@@ -49,7 +49,7 @@ DEPENDENCIES
   awesome_print
   lob
   pony
-  rack (~> 1.1)
+  rack (~> 2.1)
   rspec
 
 BUNDLED WITH
