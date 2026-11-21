@@ -1,3 +1,4 @@
 config/people.yml
 config/mailer.yml
 config/lob.yml
+*.gem
