@@ -2,9 +2,9 @@
 
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
-describe Giftr do
+describe Giftr::Event do
   before :each do
-    @gr = Giftr.new(File.join(File.dirname(__FILE__), 'config', 'people.yml'))
+    @gr = Giftr::Event.new(File.join(File.dirname(__FILE__), 'config', 'people.yml'))
   end
 
   describe '#names' do

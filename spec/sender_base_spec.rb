@@ -2,10 +2,10 @@
 
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
-describe SenderBase do
+describe Giftr::SenderBase do
   describe "#send" do
     it "should raise error" do
-      expect {SenderBase.new.send}.to raise_error
+      expect {Giftr::SenderBase.new.send}.to raise_error
     end
   end
 end
