@@ -1,2 +1,13 @@
-:account_id: "1383408"
-:api_key: "test_4f7e1328726ca28ebdab"
+:api_key: "test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# Optional: sender address, required by Lob for postcards sent outside the US
+# (a hash like below, or a Lob address id "adr_...")
+# :from:
+#   :name: "Le lutin"
+#   :address_line1: "1 rue du Pôle Nord"
+#   :address_city: "Paris"
+#   :address_zip: "75001"
+#   :address_country: "FR"
+
+# Optional: front artwork (URL, HTML or Lob template id)
+# :front: "https://www.lob.com/postcardfront.pdf"
