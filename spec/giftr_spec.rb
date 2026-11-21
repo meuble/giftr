@@ -56,6 +56,14 @@ describe Giftr::Event do
       expect(@gr.check_pair({:giver => {:name => "1", :couple_id => "toto"}, :receiver => {:name => "2", :couple_id => "toto"}})).to be false
     end
 
+    it "should return false when giver already gave to receiver last year" do
+      expect(@gr.check_pair({:giver => {:name => "1"}, :receiver => {:name => "2", :previous_receiver => "1"}})).to be false
+    end
+
+    it "should return false when receiver gave to giver last year (return gift)" do
+      expect(@gr.check_pair({:giver => {:name => "1", :previous_receiver => "2"}, :receiver => {:name => "2"}})).to be false
+    end
+
     it "should return true when giver is not receiver" do
       expect(@gr.check_pair({:giver => {:name => "1"}, :receiver => {:name => "2"}})).to be true
     end
