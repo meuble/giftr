@@ -77,14 +77,14 @@ describe Giftr::Event do
     it 'should check each pairs' do
       pairs = [{:giver => {:name => "1"}, :receiver => {:name => "2"}}, {:giver => {:name => "3"}, :receiver => {:name => "4"}}, {:giver => {:name => "4"}, :receiver => {:name => "5"}}]
       pairs.each do |pair|
-        @gr.should_receive(:check_pair).once.with(pair).and_return(true)
+        expect(@gr).to receive(:check_pair).once.with(pair).and_return(true)
       end
       expect(@gr.check_pairs(pairs)).to be true
     end
 
     it "should check if pairs are circular" do
       pairs = [{:giver => {:name => "1"}, :receiver => {:name => "2"}}, {:giver => {:name => "3"}, :receiver => {:name => "4"}}, {:giver => {:name => "4"}, :receiver => {:name => "5"}}]
-      @gr.should_receive(:has_circular_pairs?).once.with(pairs).and_return(true)
+      expect(@gr).to receive(:has_circular_pairs?).once.with(pairs).and_return(true)
       expect(@gr.check_pairs(pairs)).to be true
     end
 
