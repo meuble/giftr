@@ -1,4 +1,8 @@
 config/people.yml
 config/mailer.yml
 config/lob.yml
+config/*.yml
+config/*.bak
+config/*.before-*
+logs/
 *.gem
