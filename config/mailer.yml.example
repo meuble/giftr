@@ -5,3 +5,8 @@
   :user_name: 'login'
   :password: 'password'
   :authentication: :plain # :plain, :login, :cram_md5, no auth by default
+
+# Optional message settings (defaults are in lib/giftr/mailer.rb)
+:from: 'santa@example.com' # defaults to smtp user_name
+:subject: "[Lutin de Noël] Vous savez à qui offrir un cadeau !"
+:body: "Bonjour !\n\nLa personne à qui vous devez faire un cadeau est : %{receiver} !\n\n-- \nLe lutin"

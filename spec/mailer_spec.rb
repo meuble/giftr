@@ -27,5 +27,15 @@ describe Giftr::Mailer do
       @mailer.send({:giver => {:email => "toto@titi.fr"}, :receiver => {:name => "Tata"}})
     end
 
+    it "should use subject and body from config, replacing %{receiver}" do
+      mailer = Giftr::Mailer.new(:config_path => File.join(File.dirname(__FILE__), 'config', 'mailer.yml'))
+      mailer.instance_variable_set(:@subject, "Lutin pour %{receiver}")
+      mailer.instance_variable_set(:@body, "Tu offres à %{receiver}, 100% secret")
+      Pony.should_receive(:deliver) do |mail|
+        expect(mail.subject).to eq("Lutin pour Tata")
+        expect(mail.body.decoded).to eq("Tu offres à Tata, 100% secret")
+      end
+      mailer.send({:giver => {:email => "toto@titi.fr"}, :receiver => {:name => "Tata"}})
+    end
   end
 end
